@@ -1,0 +1,10 @@
+name: jenkins
+home: https://github.com/deis/jenkins
+version: <Will be populated by the ci before publishing the chart>
+description: Jenkins CI Server for the Deis Workflow project
+sources:
+  - https://github.com/kubernetes/charts/tree/master/stable/jenkins
+  - https://github.com/deis/jenkins-node
+maintainers:
+  - name: Deis Team
+    email: engineering@deis.com
