@@ -11,7 +11,7 @@ The Docker image is a nearly stock variant of the official [Jenkins image][] exc
 
 ### Helm chart
 
-For installing via the Helm chart, please see the chart's [README.md][charts/jenkins/README.md].
+For installing via the Helm chart, please see the chart's [README.md](charts/jenkins/README.md).
 
 [Workflow]: https://github.com/deis/workflow
 [Helm]: https://github.com/kubernetes/helm
