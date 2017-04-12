@@ -4,20 +4,21 @@ Jenkins master and slave cluster utilizing the Jenkins Kubernetes plugin
 
 * https://wiki.jenkins-ci.org/display/JENKINS/Kubernetes+Plugin
 
-Inspired by the awesome work of Carlos Sanchez <carlos@apache.org>
+This version is a fork of the canonical [stable/jenkins](https://github.com/kubernetes/charts/tree/master/stable/jenkins) chart from the official [Kubernetes Charts](https://github.com/kubernetes/charts) repository.
 
 ## Chart Details
 This chart will do the following:
 
-* 1 x Jenkins Master with port 8080 exposed on an external LoadBalancer
-* All using Kubernetes Deployments
+* 1 x Jenkins Master with port 8080 exposed on an external LoadBalancer (by default)
+* Optionally, Jenkins Master can be configured to expose a dedicated LoadBalancer for the JNLP service port (see [Configuration](https://github.com/deis/jenkins/blob/master/charts/jenkins/README.md#configuration)).  This may be useful if port 8080 is fronted by an Ingress Controller.
+* Values supplied under the `Agent` section will be given to the Kubernetes Plugin in Jenkins for spawning dynamic agents.
 
 ## Installing the Chart
 
-To install the chart with the release name `my-release`:
+To install the chart with the release name `my-release` locally:
 
 ```bash
-$ helm install --name my-release stable/jenkins
+$ helm install --name my-release charts/jenkins
 ```
 
 ## Configuration
@@ -64,7 +65,7 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```bash
-$ helm install --name my-release -f values.yaml stable/jenkins
+$ helm install --name my-release -f values.yaml charts/jenkins
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
@@ -98,6 +99,19 @@ It is possible to mount several volumes using `Persistence.volumes` and `Persist
 $ helm install --name my-release --set Persistence.ExistingClaim=PVC_NAME stable/jenkins
 ```
 
+### Persistence via Mounted Volume
+
+It is also possible to use a mounted volume for persisting state in `/var/jenkins_home`.  Simply supply the host path to the mounted disk on the Kubernetes Node and be sure to pin Jenkins Master to said node.  This can be accomplished by populating the following values in the `values.yaml` file used to install Jenkins:
+```
+Master:
+...
+  NodeSelector:
+    mountedvolumenode: "true"
+  JenkinsHome:
+    HostPath: /mounted/jenkins_home
+...
+```
+
 ## Custom ConfigMap
 
 When creating a new chart with this chart as a dependency, CustomConfigMap can be used to override the default config.xml provided.
@@ -110,6 +124,3 @@ jenkins:
   Master:
     CustomConfigMap: true
 ```
-
-# Todo
-* Enable Docker-in-Docker or Docker-on-Docker support on the Jenkins agents
