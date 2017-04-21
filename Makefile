@@ -14,10 +14,14 @@ check-docker:
 
 build: docker-build
 push: docker-push
+run: docker-run
 
 docker-build: check-docker
 	docker build --rm -t ${IMAGE} .
 	docker tag ${IMAGE} ${MUTABLE_IMAGE}
+
+docker-run:
+	docker run --rm ${IMAGE}
 
 clean: check-docker
 	docker rmi $(IMAGE)
