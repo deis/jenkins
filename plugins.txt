@@ -19,7 +19,7 @@ blueocean-pipeline-editor:0.2.0
 blueocean-rest:1.0.1
 blueocean-rest-impl:1.0.1
 blueocean-web:1.0.1
-branch-api:2.0.8
+branch-api:2.0.11
 build-failure-analyzer:1.17.2
 build-name-setter:1.6.5
 build-pipeline-plugin:1.5.6
@@ -34,7 +34,7 @@ docker-commons:1.5
 docker-workflow:1.9
 durable-task:1.13
 embeddable-build-status:1.9
-favorite:2.0.4
+favorite:2.3.0
 ghprb:1.33.4
 git:3.1.0
 git-client:2.4.4
@@ -56,7 +56,7 @@ junit:1.20
 jquery:1.11.2-0
 jquery-detached:1.2.1
 kubernetes:0.11
-mailer:1.19
+mailer:1.20
 matrix-auth:1.4
 matrix-project:1.7.1
 maven-plugin:2.8
